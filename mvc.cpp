@@ -33,7 +33,7 @@ void *motionVideoRecorder(void *all_args) {
     if (!input_video.isOpened()) {
         //error in opening the video input
         cerr << "Unable to open: " << input_file << endl;
-        return;
+        return nullptr;
     }
     
     int ex = static_cast<int>(input_video.get(CAP_PROP_FOURCC));     // Get Codec Type- Int form
@@ -42,11 +42,11 @@ void *motionVideoRecorder(void *all_args) {
     Size S = Size(640,480);
 
     int input_fps = input_video.get(CAP_PROP_FPS);
-    cout << "Input Video FPS: " << input_fps;
+    cout << "Input Video FPS: " << input_fps << endl;
     VideoWriter output_video(output_file,ex,input_fps,S,true);
     if (!output_video.isOpened()) {
         cout << "Could not open the output video for write: " << output_file << endl;
-        return;
+        return nullptr;
     }
     
     Ptr<BackgroundSubtractor> pBackSub;
@@ -73,7 +73,7 @@ void *motionVideoRecorder(void *all_args) {
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<seconds>(stop - start);
     std::cout << "Finished writing: " << output_file << endl;
-    cout << "Frame processed per second: " << double(frames_processed)/duration.count() << endl;
-    return;
+    cout << "Frame processed per second: " << frames_processed/duration.count() << endl;
+    return nullptr;
 }
 

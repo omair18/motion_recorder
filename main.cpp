@@ -7,7 +7,7 @@ using namespace cv;
 
 const char* params
     = "{ help h         |           | Print usage }"
-      "{ @input          |  | Path to a video }"
+      "{ input          |  | Path to a video }"
       "{ thresh           | 5000      | Threshold value to determine whether a motion was detected in a frame or not. This will be compared to the count of white pixels in the foreground mask }"
       "{ num_threads | 4 | Number of threads to run program on }";
 
@@ -20,6 +20,7 @@ int main(int argc, char* argv[]){
 
     if(parser.has("help")){
         parser.printMessage();
+        exit(1);
     }
 
 
